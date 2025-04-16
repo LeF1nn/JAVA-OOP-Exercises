@@ -9,12 +9,24 @@ public class Manager {
         this.courts = new ArrayList<>();
     }
 
-    public void addClient(Client client) {
+    public boolean addClient(Client client) {
+        for (Client c : clients) {
+            if (c.getName().equals(client.getName())) {
+                return false;
+            }
+        }
         this.clients.add(client);
+        return true;
     }
 
-    public void addCourt(Court court) {
+    public boolean addCourt(Court court) {
+        for (Court c : courts) {
+            if (c.getName().equals(court.getName())) {
+                return false;
+            }
+        }
         this.courts.add(court);
+        return true;
     }
 
     public void removeClient(Client client) {
@@ -26,8 +38,8 @@ public class Manager {
     }
 
     public boolean bookCourt(String courtName, String clientName) {
-        for(Court court : courts) {
-            if(court.getName().equals(courtName)) {
+        for (Court court : courts) {
+            if (court.getName().equals(courtName) && court.isAvailable()) {
                 court.setClientName(clientName);
                 court.setIsAvailable(false);
                 return true;
@@ -36,9 +48,13 @@ public class Manager {
         return false;
     }
 
-    public void cancelBooking(Court court) {
-        court.setClientName(null);
-        court.setIsAvailable(true);
+    public boolean cancelBooking(Court court) {
+        if (court != null && !court.isAvailable()) {
+            court.setClientName(null);
+            court.setIsAvailable(true);
+            return true;
+        }
+        return false;
     }
 
     public ArrayList<Client> getClients() {
@@ -48,6 +64,4 @@ public class Manager {
     public ArrayList<Court> getCourts() {
         return courts;
     }
-
-
 }
