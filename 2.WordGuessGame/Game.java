@@ -34,7 +34,7 @@ public class Game {
                 break;
             }
         }
-        return c;
+        return c ;
     }
 
     public void checkWord(String charecter) {
