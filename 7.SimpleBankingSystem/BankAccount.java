@@ -1,9 +1,10 @@
-public class BankAcc {
+public class BankAccount {
+    private String accountNumber;
+    private double balance;
 
-    private int balance;
-
-    public BankAcc() {
-        this.balance = (int) 0.0;
+    public BankAccount(String accountNumber) {
+        this.accountNumber = accountNumber;
+        this.balance = 0.0;
     }
 
     public void deposit(double amount) {
@@ -24,8 +25,7 @@ public class BankAcc {
         }
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 }
-
